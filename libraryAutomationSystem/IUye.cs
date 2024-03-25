@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace CSProjeDemo1
 {
-    internal interface IUye
+    public interface IUye
     {
-        string Ad { get; set; }
-        string Soyad { get; set; }
-        string UyeNo { get; set; }
-        List<Kitap> KitapList { get; set; }
-        public void OduncAl() { }
-        public void OduncuBırak() { }
+        public string Ad { get; set; }
+        public string Soyad { get; set; }
+        public string UyeNo { get; set; }
+        public List<Kitap> KitapListesi { get; set; }
+        public void OduncAl(Kitap kitap);
+        public void OduncBirak(Kitap kitap);
     }
 }

@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace CSProjeDemo1
 {
-    public class KitapBilim : Kitap
+    public class KitapBilim(string kitapNo, string iSBN, string baslik, string yazar, string yayinYili) : Kitap(kitapNo, iSBN, baslik, yazar, yayinYili, KitapTuru.Bilim)
     {
-
     }
 }

@@ -15,23 +15,36 @@ namespace CSProjeDemo1
 
         public string UyeNo { get; set; } = null!;
 
-        public List<Kitap> KitapList { get; set; } = null;
+        public List<Kitap> KitapListesi { get; set; }
 
-        public void OduncAl(Kitap kitap, Uye uye)
+        public Uye()
         {
-            if(kitap.Durum == Durum.OduncAlinabilir)
-            {
-                KitapList.Add(kitap);
-                kitap.Durum = Durum.OduncAlindi;
+            KitapListesi = [];
+        }    
+
+        public void OduncAl(Kitap kitap)
+        {
+            ArgumentNullException.ThrowIfNull(kitap);
+
+            if (KitapListesi != null && KitapListesi.Any(x => x.KitapNo == kitap.KitapNo )) {
+                throw new Exception("Kitap zaten ödünç alınmış.");
             }
+            if(kitap.Durum != Durum.OduncAlinabilir)
+            {
+                throw new Exception("Kitabın durumu ödünç alınmaya uygun değil");
+            }
+            KitapListesi.Add(kitap);
         }
-        public void OduncuBırak(Kitap kitap)
+
+        public void OduncBirak(Kitap kitap)
         {
-            if (kitap.Durum == Durum.OduncAlindi)
+            ArgumentNullException.ThrowIfNull(kitap);
+
+            if (KitapListesi != null && !KitapListesi.Any(x => x.KitapNo == kitap.KitapNo))
             {
-                KitapList.Remove(kitap);
-                kitap.Durum = Durum.OduncAlinabilir;
+                throw new Exception("Bu kitap ödünç alınmamış.");
             }
+            KitapListesi.RemoveAll(x => x.KitapNo == kitap.KitapNo);
         }
     }
 }
